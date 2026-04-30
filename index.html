@@ -344,6 +344,141 @@
         </footer>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // ── CONFIGURATION ──────────────────────────────────────────
+        const AIRTABLE_PAT     = 'patxSxpa8lYyUcD2J.c57b19d2869dd8f6486e04ed05cb05e95fa4472bfa7048ce3ffb6535f4185c8b';
+        const AIRTABLE_BASE_ID = 'appYo5AO9TQs8hWMN';
+        const AIRTABLE_TABLE   = 'Registrations'; // must match your table name exactly
+        // ───────────────────────────────────────────────────────────
+
+        // ── COUNTDOWN TIMER ────────────────────────────────────────
+        function updateCountdown() {
+            const eventDate = new Date('2026-06-15T08:30:00');
+            const now = new Date();
+            const diff = eventDate - now;
+
+            if (diff <= 0) {
+                document.getElementById('days').textContent    = '00';
+                document.getElementById('hours').textContent   = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+
+            const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours   = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent    = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent   = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // ── STICKY REGISTER BUTTON ─────────────────────────────────
+        window.addEventListener('scroll', () => {
+            const sticky = document.getElementById('stickyRegister');
+            if (sticky) {
+                sticky.style.opacity = window.scrollY > 300 ? '1' : '0';
+                sticky.style.pointerEvents = window.scrollY > 300 ? 'auto' : 'none';
+            }
+        });
+
+        // ── AIRTABLE REGISTRATION ──────────────────────────────────
+        async function checkDuplicateEmail(email) {
+            const formula = encodeURIComponent(`{Email Address} = "${email}"`);
+            const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE)}?filterByFormula=${formula}&maxRecords=1`;
+
+            const res = await fetch(url, {
+                headers: {
+                    'Authorization': `Bearer ${AIRTABLE_PAT}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!res.ok) throw new Error('Failed to check email');
+            const data = await res.json();
+            return data.records && data.records.length > 0;
+        }
+
+        async function submitToAirtable(name, email, company, title) {
+            const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE)}`;
+
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${AIRTABLE_PAT}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    fields: {
+                        'Full Name':    name,
+                        'Email Address': email,
+                        'Company':      company,
+                        'Job Title':    title
+                    }
+                })
+            });
+
+            if (!res.ok) {
+                const err = await res.json();
+                throw new Error(err.error?.message || 'Submission failed');
+            }
+
+            return await res.json();
+        }
+
+        // ── FORM HANDLER ───────────────────────────────────────────
+        document.getElementById('registrationForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const btn         = this.querySelector('button[type="submit"]');
+            const successMsg  = document.getElementById('successMessage');
+            const errorMsg    = document.getElementById('errorMessage');
+
+            const name    = document.getElementById('name').value.trim();
+            const email   = document.getElementById('email').value.trim().toLowerCase();
+            const company = document.getElementById('company').value.trim();
+            const title   = document.getElementById('title').value.trim();
+
+            // Reset state
+            successMsg.style.display = 'none';
+            errorMsg.style.display   = 'none';
+            btn.disabled = true;
+            btn.textContent = 'Submitting…';
+
+            try {
+                // Check for duplicate email across ALL browsers/devices
+                const isDuplicate = await checkDuplicateEmail(email);
+
+                if (isDuplicate) {
+                    errorMsg.querySelector('p').textContent = '✗ This email is already registered.';
+                    errorMsg.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = 'Complete Registration';
+                    return;
+                }
+
+                // Submit to Airtable
+                await submitToAirtable(name, email, company, title);
+
+                // Success
+                successMsg.style.display = 'block';
+                this.reset();
+                this.style.display = 'none';
+
+            } catch (err) {
+                console.error('Registration error:', err);
+                errorMsg.querySelector('p').textContent = '✗ Something went wrong. Please try again or email heena.chauhan@ibm.com.';
+                errorMsg.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = 'Complete Registration';
+            }
+        });
+    </script>
 </body>
 </html>
