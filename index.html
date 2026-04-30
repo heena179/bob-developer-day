@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBM Bob Developer Day - June 15, 2026</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Sticky Register Button -->
+    <div id="stickyRegister" class="sticky-register">
+        <a href="#register" class="btn-sticky">Register Now</a>
+    </div>
+
+    <div class="container">
+        <header class="hero">
+            <div class="hero-content">
+                <img src="ibm-logo.svg" alt="IBM Logo" class="ibm-logo">
+                <h1>IBM Bob Developer Day</h1>
+                <p class="hero-subtitle">Join us for an exciting day of hands-on learning and innovation</p>
+                
+                <!-- Countdown Timer -->
+                <div class="countdown-container">
+                    <div class="countdown-label">Event starts in:</div>
+                    <div id="countdown" class="countdown">
+                        <div class="countdown-item">
+                            <span id="days" class="countdown-value">00</span>
+                            <span class="countdown-unit">Days</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="hours" class="countdown-value">00</span>
+                            <span class="countdown-unit">Hours</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="minutes" class="countdown-value">00</span>
+                            <span class="countdown-unit">Minutes</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="seconds" class="countdown-value">00</span>
+                            <span class="countdown-unit">Seconds</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-details">
+                    <div class="detail-item">
+                        <div class="date-icon">
+                            <div class="date-month">JUN</div>
+                            <div class="date-day">15</div>
+                        </div>
+                        <strong>June 15, 2026</strong>
+                    </div>
+                    <div class="detail-item">
+                        <span class="icon">📍</span>
+                        <strong>IBM Lab Markham</strong>
+                        <span>8200 Warden Avenue</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="icon">⏰</span>
+                        <strong>8:30 AM - 4:00 PM</strong>
+                    </div>
+                </div>
+                <a href="#register" class="btn-hero">Register Now</a>
+            </div>
+        </header>
+
+        <main>
+            <!-- Event Highlights Section -->
+            <section class="highlights-section">
+                <h2 class="section-title">Why Attend?</h2>
+                <div class="highlights-grid">
+                    <div class="highlight-card">
+                        <div class="highlight-icon">🚀</div>
+                        <h3>Hands-On Learning</h3>
+                        <p>Build real projects with Bob in guided sessions. Choose from 4 specialized tracks and take home working code.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">👥</div>
+                        <h3>Expert Guidance</h3>
+                        <p>Learn directly from IBM Canada Software Lab engineers who built Bob. Get your questions answered by the creators.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">🎯</div>
+                        <h3>Live Demonstrations</h3>
+                        <p>Watch live builds on stage. See MCP, watsonx Orchestrate, and Bob wired together in real-time.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">🤝</div>
+                        <h3>Network & Collaborate</h3>
+                        <p>Connect with fellow developers, share ideas at Demo Alley, and collaborate on challenging problems.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">🍽️</div>
+                        <h3>Food & Refreshments</h3>
+                        <p>Complimentary breakfast, lunch, and coffee throughout the day. Focus on learning, we'll handle the rest.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">🏆</div>
+                        <h3>Prizes & Recognition</h3>
+                        <p>Showcase your builds and compete for prizes. Vote on the best breakout projects at the end of the day.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Demo Alley Info -->
+            <section class="info-banner">
+                <div class="banner-content">
+                    <span class="banner-icon">💎</span>
+                    <div>
+                        <strong>DEMO ALLEY</strong> · live 10:00 – 15:30 – running in parallel throughout the day. Skip a breakout, wander in. Lab stations + Genius Bar pods: bring your hardest problem, pair with an engineer.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Agenda Section -->
+            <section class="agenda-section">
+                <h2 class="section-title">The Build Log</h2>
+                
+                <div class="agenda-timeline">
+                    <div class="agenda-item">
+                        <div class="time">08:30</div>
+                        <div class="content">
+                            <h3>Doors — Code Café & Demo Alley open</h3>
+                            <p class="duration">30 MIN</p>
+                            <p class="description">Espresso bar running. Stations live. Pair with an engineer before the day begins.</p>
+                        </div>
+                    </div>
+
+                    <div class="agenda-item keynote">
+                        <div class="time">09:00</div>
+                        <div class="content">
+                            <h3>Welcome — Inside the Lab <span class="badge">◆</span></h3>
+                            <p class="duration">30 MIN · KEYNOTE</p>
+                            <p class="description">Director, IBM Canada Software Lab. Why we built Bob. Where it goes next.</p>
+                        </div>
+                    </div>
+
+                    <div class="agenda-item live">
+                        <div class="time">09:30</div>
+                        <div class="content">
+                            <h3>CTO — The Agentic Control Plane <span class="badge">◆</span></h3>
+                            <p class="duration">50 MIN · LIVE</p>
+                            <p class="description">A live build on stage. MCP, watsonx Orchestrate, Bob – wired together in front of you. Q&A throughout.</p>
+                        </div>
+                    </div>
+
+                    <div class="agenda-item break">
+                        <div class="time">10:20</div>
+                        <div class="content">
+                            <h3>Break · Demo Alley open</h3>
+                            <p class="duration">10 MIN</p>
+                        </div>
+                    </div>
+
+                    <div class="agenda-item hands-on">
+                        <div class="time">10:30</div>
+                        <div class="content">
+                            <h3>Breakout · Round 1 → pick one of four <span class="badge">◆</span></h3>
+                            <p class="duration">2.5 HRS · HANDS-ON</p>
+                            <p class="description">Deep-dive hands-on session. Includes setup, install, and guided build time. See tracks below.</p>
+                        </div>
+                    </div>
+
+                    <div class="agenda-item panel">
+                        <div class="time">13:00</div>
+                        <div class="content">
+                            <h3>The Developers' Table <span class="badge">◆</span></h3>
+                            <p class="duration">60 MIN · PANEL + LUNCH</p>
+                            <p class="description">Lunch served while five Bob builders from the lab take your questions. Unscripted. No dais, no mics.</p>
+                        </div>
+                    </div>
+
+                    <div class="agenda-item hands-on">
+                        <div class="time">14:00</div>
+                        <div class="content">
+                            <h3>Breakout · Round 2 → pick a second <span class="badge">◆</span></h3>
+                            <p class="duration">90 MIN · HANDS-ON</p>
+                            <p class="description">Bob is already installed from Round 1 – straight into the build. Pick a different track, take home a second project.</p>
+                        </div>
+                    </div>
+
+                    <div class="agenda-item">
+                        <div class="time">15:30</div>
+                        <div class="content">
+                            <h3>Lab Floor Tour + Build Showcase</h3>
+                            <p class="duration">30 MIN</p>
+                            <p class="description">Walk the floor where Bob is shipped. Vote on the best breakout build. Prizes at close. Wrap at 16:00.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tracks Section -->
+            <section class="tracks-section">
+                <h2 class="section-title">The Four Tracks</h2>
+                
+                <div class="tracks-grid">
+                    <div class="track-card">
+                        <div class="track-header">TRACK A</div>
+                        <h3>Java Modernization with Bob</h3>
+                        <p>Legacy to cloud-native, at refactor speed. Bring a class. Leave with a pull request.</p>
+                    </div>
+
+                    <div class="track-card">
+                        <div class="track-header">TRACK B</div>
+                        <h3>Build an Agent in 45 Minutes</h3>
+                        <p>MCP + watsonx Orchestrate + Bob. Wire a tool, register it, call it. Working agent by the bell.</p>
+                    </div>
+
+                    <div class="track-card">
+                        <div class="track-header">TRACK C</div>
+                        <h3>Real-Time Personalization with Kafka</h3>
+                        <p>Bob on a streaming use-case. Events in, decisions out. Built with Confluent under the hood.</p>
+                    </div>
+
+                    <div class="track-card">
+                        <div class="track-header">TRACK D</div>
+                        <h3>The Governance Lane</h3>
+                        <p>Why Bob beats "give devs API keys." LLM routing, audit trail, enterprise rails – hands on.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What to Bring Section -->
+            <section class="info-section">
+                <h2 class="section-title">What to Bring</h2>
+                <div class="info-content">
+                    <div class="info-card">
+                        <div class="info-icon">💻</div>
+                        <h3>Your Laptop</h3>
+                        <p>Bring your laptop if you want to participate in hands-on sessions with Bob. We'll guide you through setup and installation during the breakout sessions.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🔌</div>
+                        <h3>Charger & Accessories</h3>
+                        <p>Don't forget your laptop charger and any accessories you might need for a full day of coding and learning.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">📝</div>
+                        <h3>Questions & Ideas</h3>
+                        <p>Come prepared with your toughest problems and innovative ideas. Our engineers are here to help you solve them.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <h3>🍽️ Will food be provided?</h3>
+                        <p>Yes! Breakfast and lunch will be provided complimentary for all attendees. Coffee and refreshments will be available throughout the day at the Code Café.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>🚗 Is parking available?</h3>
+                        <p>Yes, onsite parking is free for all event attendees at IBM Lab Markham, 8200 Warden Avenue.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>💻 Do I need to bring my laptop?</h3>
+                        <p>If you want to participate in the hands-on breakout sessions, please bring your laptop. We'll help you set up Bob during the sessions.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>👔 What's the dress code?</h3>
+                        <p>Business casual or smart casual. Comfort is key as you'll be coding and collaborating throughout the day.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>🎯 Can I attend just part of the day?</h3>
+                        <p>While we encourage full-day attendance to get the complete experience, you're welcome to join for specific sessions that interest you most.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>🤝 Can I bring a colleague?</h3>
+                        <p>Absolutely! Please have them register separately so we can plan for the right number of attendees.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Registration Section -->
+            <section id="register" class="registration-section">
+                <div class="registration-card" style="max-width: 1000px;">
+                    <h2>Register for IBM Bob Developer Day</h2>
+                    <p class="description">Secure your spot for this exclusive hands-on event. Limited seats available.</p>
+                    
+                    <!-- PASTE YOUR AIRTABLE EMBED CODE BELOW THIS LINE -->
+                    <!-- Replace the src URL with your Airtable embed URL -->
+                    <iframe class="airtable-embed"
+                            src="https://airtable.com/embed/appYo5AO9TQs8hWMN/shrfKEt4EBQ4R2yKo"
+                            frameborder="0"
+                            onmousewheel=""
+                            width="100%"
+                            height="800"
+                            style="background: transparent; border: 1px solid #d0e2ff; border-radius: 8px;">
+                    </iframe>
+                    <!-- PASTE YOUR AIRTABLE EMBED CODE ABOVE THIS LINE -->
+                    
+                    <p style="text-align: center; color: #525252; margin-top: 20px; font-size: 0.9em;">
+                        🔒 Your information is secure and will only be used for event registration purposes.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="contact-section">
+                <h2 class="section-title">Questions?</h2>
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>Get in Touch</h3>
+                    <p>Have questions about the event? Need more information?</p>
+                    <p class="contact-info">
+                        <strong>Heena Singh Chauhan</strong><br>
+                        Event Organizer<br>
+                        <a href="mailto:heena.chauhan@ibm.com">heena.chauhan@ibm.com</a>
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 IBM Canada Software Lab. All rights reserved.</p>
+            <div class="bob-credit">
+                <p>✨ This page was developed by <strong>Bob</strong> ✨</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
