@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Dashboard - IBM Bob Developer Day</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Authentication Modal -->
+    <div id="authModal" class="auth-modal">
+        <div class="auth-content">
+            <h2>🔒 Dashboard Access</h2>
+            <p>Please enter your IBM email address to access the registration dashboard.</p>
+            <input type="email" id="authEmail" placeholder="your.email@ibm.com" autocomplete="email">
+            <div id="authError" class="auth-error">
+                Access denied. Only authorized users can view this dashboard.
+            </div>
+            <button onclick="authenticate()" class="btn-primary" style="width: 100%;">Access Dashboard</button>
+        </div>
+    </div>
+
+    <div class="container" id="dashboardContent" style="display: none;">
+        <header class="hero">
+            <div class="hero-content">
+                <h1>IBM Bob Developer Day</h1>
+                <p class="hero-subtitle">Registration Dashboard</p>
+            </div>
+        </header>
+
+        <main style="padding: 60px 40px; background: #e8f4fd;">
+            <div class="dashboard-card">
+                <div class="dashboard-header">
+                    <h2>Event Registrations</h2>
+                    <div class="action-buttons">
+                        <button onclick="exportToCSV()" class="btn-export">📥 Export to CSV</button>
+                        <button onclick="logout()" class="btn-secondary" style="padding: 14px 28px;">🔓 Logout</button>
+                        <a href="index.html" class="btn-secondary" style="padding: 14px 28px;">← Back to Event Page</a>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 id="totalRegistrations">0</h3>
+                        <p>Total Registrations</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="uniqueCompanies">0</h3>
+                        <p>Unique Companies</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="todayRegistrations">0</h3>
+                        <p>Today's Registrations</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table id="registrationsTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Company</th>
+                                <th>Title</th>
+                                <th>Registered At</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registrationsBody">
+                            <!-- Registrations will be populated here -->
+                        </tbody>
+                    </table>
+                    <div id="emptyState" class="empty-state" style="display: none;">
+                        <p>📋 No registrations yet</p>
+                        <p style="font-size: 0.9em;">Registrations will appear here once attendees sign up for IBM Bob Developer Day.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 IBM Canada Software Lab. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
