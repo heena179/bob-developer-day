@@ -3,57 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Dashboard - IBM Bob Developer Day</title>
+    <title>Registration Dashboard — IBM Bob Developer Day</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600;700&family=IBM+Plex+Serif:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Dashboard-specific overrides */
+        body { background: #f2f4f8; }
+        .dash-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .dash-topbar {
+            background: #2d3540;
+            padding: 0 40px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .dash-topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .dash-topbar img {
+            width: 48px;
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+        }
+        .dash-topbar-title {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.35);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .dash-topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .dash-main {
+            flex: 1;
+            padding: 48px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .dash-page-header {
+            margin-bottom: 40px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .dash-page-header h1 {
+            font-family: 'IBM Plex Serif', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 300;
+            color: #121619;
+            letter-spacing: -0.01em;
+        }
+        .dash-page-header .sub {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            color: #878d96;
+            letter-spacing: 0.08em;
+            margin-top: 6px;
+            text-transform: uppercase;
+        }
+        .dash-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .dash-card {
+            background: #ffffff;
+            border: 1px solid #dde1e6;
+        }
+        .dash-card-inner {
+            padding: 40px;
+        }
+        .dash-footer {
+            padding: 24px 40px;
+            background: #2d3540;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.2);
+        }
+        /* Override stats grid for dashboard */
+        .stats-grid {
+            margin-bottom: 40px;
+            border: none;
+            background: none;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .stat-card {
+            border: 1px solid #dde1e6;
+            background: #ffffff;
+            padding: 32px;
+            text-align: left;
+        }
+        .stat-card h3 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #0f62fe;
+            margin-bottom: 8px;
+        }
+        .stat-card p {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: #878d96;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .stat-accent {
+            display: block;
+            width: 32px;
+            height: 3px;
+            background: #0f62fe;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <!-- Authentication Modal -->
+
+    <!-- Auth Modal -->
     <div id="authModal" class="auth-modal">
         <div class="auth-content">
-            <h2>🔒 Dashboard Access</h2>
-            <p>Please enter your IBM email address to access the registration dashboard.</p>
-            <input type="email" id="authEmail" placeholder="your.email@ibm.com" autocomplete="email">
+            <h2>Dashboard Access</h2>
+            <p>Enter your IBM email address to access the registration dashboard.</p>
+            <input type="email" id="authEmail" placeholder="your.name@ibm.com" autocomplete="email">
             <div id="authError" class="auth-error">
                 Access denied. Only authorized users can view this dashboard.
             </div>
-            <button onclick="authenticate()" class="btn-primary" style="width: 100%;">Access Dashboard</button>
+            <button onclick="authenticate()" class="btn-primary" style="width:100%; padding: 16px; font-size: 0.95rem;">Access Dashboard →</button>
         </div>
     </div>
 
-    <div class="container" id="dashboardContent" style="display: none;">
-        <header class="hero">
-            <div class="hero-content">
-                <h1>IBM Bob Developer Day</h1>
-                <p class="hero-subtitle">Registration Dashboard</p>
+    <div class="dash-wrapper" id="dashboardContent" style="display:none;">
+
+        <!-- Top Bar -->
+        <div class="dash-topbar">
+            <div class="dash-topbar-left">
+                <img src="ibm-logo.svg" alt="IBM">
+                <span class="dash-topbar-title">Bob Developer Day · Registration Dashboard</span>
             </div>
-        </header>
+            <div class="dash-topbar-actions">
+                <a href="index.html" class="btn-secondary" style="padding:8px 16px; font-size:0.85rem;">← Event Page</a>
+                <button onclick="logout()" class="btn-secondary" style="padding:8px 16px; font-size:0.85rem; border:none; cursor:pointer;">Logout</button>
+            </div>
+        </div>
 
-        <main style="padding: 60px 40px; background: #e8f4fd;">
-            <div class="dashboard-card">
-                <div class="dashboard-header">
-                    <h2>Event Registrations</h2>
-                    <div class="action-buttons">
-                        <button onclick="exportToCSV()" class="btn-export">📥 Export to CSV</button>
-                        <button onclick="logout()" class="btn-secondary" style="padding: 14px 28px;">🔓 Logout</button>
-                        <a href="index.html" class="btn-secondary" style="padding: 14px 28px;">← Back to Event Page</a>
-                    </div>
+        <div class="dash-main">
+
+            <!-- Page Header -->
+            <div class="dash-page-header">
+                <div>
+                    <h1>Event Registrations</h1>
+                    <p class="sub">IBM Bob Developer Day · June 15, 2026 · IBM Lab Markham</p>
                 </div>
-
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <h3 id="totalRegistrations">0</h3>
-                        <p>Total Registrations</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3 id="uniqueCompanies">0</h3>
-                        <p>Unique Companies</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3 id="todayRegistrations">0</h3>
-                        <p>Today's Registrations</p>
-                    </div>
+                <div class="dash-actions">
+                    <button onclick="exportToCSV()" class="btn-export">↓ Export CSV</button>
                 </div>
+            </div>
 
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-accent"></span>
+                    <h3 id="totalRegistrations">0</h3>
+                    <p>Total Registrations</p>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-accent"></span>
+                    <h3 id="uniqueCompanies">0</h3>
+                    <p>Unique Companies</p>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-accent"></span>
+                    <h3 id="todayRegistrations">0</h3>
+                    <p>Today's Registrations</p>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="dash-card">
                 <div class="table-container">
                     <table id="registrationsTable">
                         <thead>
@@ -67,21 +213,21 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="registrationsBody">
-                            <!-- Registrations will be populated here -->
-                        </tbody>
+                        <tbody id="registrationsBody"></tbody>
                     </table>
-                    <div id="emptyState" class="empty-state" style="display: none;">
-                        <p>📋 No registrations yet</p>
-                        <p style="font-size: 0.9em;">Registrations will appear here once attendees sign up for IBM Bob Developer Day.</p>
+                    <div id="emptyState" class="empty-state" style="display:none;">
+                        <p>NO REGISTRATIONS YET</p>
+                        <p style="font-size:0.85rem; margin-top:8px;">Registrations will appear here once attendees sign up.</p>
                     </div>
                 </div>
             </div>
-        </main>
 
-        <footer>
-            <p>&copy; 2026 IBM Canada Software Lab. All rights reserved.</p>
-        </footer>
+        </div>
+
+        <div class="dash-footer">
+            © 2026 IBM Canada Software Lab · Dashboard v1.0
+        </div>
+
     </div>
 
     <script src="dashboard.js"></script>

@@ -1,2 +1,1 @@
-# bob-developer-day
-IBM bob developer day registration
+# bob-dev-day2
